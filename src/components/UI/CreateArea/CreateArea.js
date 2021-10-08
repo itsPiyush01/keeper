@@ -2,58 +2,41 @@ import React, { useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
-import axios from "../axios-notes";
-
-
+import "./CreateArea.css";
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
-
   const [note, setNote] = useState({
     title: "",
     content: "",
-    date:""
   });
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log("[handleChange]");
-    setNote(prevNote => {
+    setNote((prevNote) => {
       return {
         ...prevNote,
-        [name]: value
+        [name]: value,
       };
     });
-  }
+  };
 
-  function submitNote(event) {
+  const submitNote = (event) => {
+    event.preventDefault();
     props.onAdd(note);
-
-    // let notes={
-    //   title:"HI",
-    //   content:"HELLO WORLD"
-    // }
-    // axios.post("/notes.json",notes)
-    // .then(response=>console.log(
-    //   "[SUCCESS]"+response))
-    
-    // .catch(err=>console.log("[Failed]"+err));
-
-
     setNote({
       title: "",
       content: "",
-      date:""
+      date: "",
     });
-    event.preventDefault();
-  }
+  };
 
-  function expand() {
+  const expand = () => {
     setExpanded(true);
-  }
+  };
 
   return (
     <div>
-      <form className="create-note" onSubmit={submitNote}  >
+      <form className="create-note" onSubmit={submitNote}>
         {isExpanded && (
           <input
             name="title"
@@ -72,7 +55,10 @@ function CreateArea(props) {
           rows={isExpanded ? 3 : 1}
         />
         <Zoom in={isExpanded}>
-          <Fab onClick={submitNote} >
+          <Fab
+            onClick={submitNote}
+            disabled={note.content === "" && note.title === "" ? true : false}
+          >
             <AddIcon />
           </Fab>
         </Zoom>
