@@ -1,7 +1,8 @@
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
+import dateFormatter from "../../../../utility/dateFormatter";
 import "./Note.css";
-import dateFormatter from "../../../utility/dateFormatter";
+
 function Note(props) {
   function handleClick() {
     props.onDelete(props.id);
