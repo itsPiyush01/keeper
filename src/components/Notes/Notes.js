@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect } from "react";
 import Note from "./Note/Note";
 import CreateArea from "../CreateArea/CreateArea";
-import axios from "../../../axios-notes";
+import axios from "../../axios-notes";
 
 const noteReducer = (currentNotes, action) => {
   switch (action.type) {

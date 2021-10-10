@@ -1,6 +1,6 @@
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
-import dateFormatter from "../../../../utility/dateFormatter";
+import dateFormatter from "../../../utility/dateFormatter";
 import "./Note.css";
 
 function Note(props) {

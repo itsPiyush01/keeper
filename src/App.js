@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../components/UI/Header/Header";
-import Notes from "./UI/Notes/Notes";
+import Header from "./components/UI/Header/Header";
+import Notes from "./components/Notes/Notes";
 // import createDate from "../utility/dateFormatter";
 
 function App() {
