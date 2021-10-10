@@ -1,6 +1,7 @@
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import "./Note.css";
+import dateFormatter from "../../../utility/dateFormatter";
 function Note(props) {
   function handleClick() {
     props.onDelete(props.id);
@@ -13,7 +14,9 @@ function Note(props) {
       <button onClick={handleClick}>
         <DeleteIcon />
       </button>
-      <i className="note__date">Date: {props.date_of_creation}</i>
+      <h6 className="note__date">
+        Edited: {dateFormatter(props.date_of_creation)}
+      </h6>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import Header from "../components/UI/Header/Header";
 import Note from "../components/UI/Note/Note";
 import CreateArea from "../components/UI/CreateArea/CreateArea";
 import axios from "../axios-notes";
-import createDate from "../utility/createDate";
+// import createDate from "../utility/dateFormatter";
 
 const noteReducer = (currentNotes, action) => {
   switch (action.type) {
@@ -46,13 +46,14 @@ function App() {
 
   const addNoteHandler = (note) => {
     dispatchHttp({ type: "SEND" });
-    const d = createDate();
+    // const d = createDate();
+    const d = new Date();
     console.log("date" + d);
 
     // d.toISOString()
     let noteObject = {
       ...note,
-      date_of_creation: d,
+      date_of_creation: "" + d,
     };
 
     axios
