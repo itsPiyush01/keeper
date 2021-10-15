@@ -1,5 +1,5 @@
 .note {
-     background: #fff;
+     /* background: #fff; */
      border-radius: 7px;
      box-shadow: 0 2px 5px #ccc;
      padding: 10px;
@@ -7,6 +7,10 @@
      width: 240px;
      margin: 16px;
      float: left;
+     color: var(--componentTxtColor);
+     background: var(--componentBgColor);
+     box-shadow: var(--componentShadow);
+     transition: var(--animationColor);
 }
 
 .note h1 {
@@ -26,12 +30,14 @@
      float: right;
      margin-right: 0px;
      color: #f5ba13;
-     background-color: #fff;
+     background-color: var(--primaryColor);
      border: none;
      width: 20px;
      height: 20px;
      cursor: pointer;
      outline: none;
+     transition: var(--animationColor);
+
 }
 
 .note__date {

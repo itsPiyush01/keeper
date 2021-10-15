@@ -2,13 +2,14 @@ import React, { useReducer, useEffect } from "react";
 import Note from "./Note/Note";
 import CreateArea from "../CreateArea/CreateArea";
 import axios from "../../axios-notes";
+import styled, { css } from "styled-components";
 
 const noteReducer = (currentNotes, action) => {
   switch (action.type) {
     case "SET":
       return action.notes;
     case "ADD":
-      return [...currentNotes, action.note];
+      return [action.note, ...currentNotes];
     case "DELETE":
       return currentNotes.filter((note) => note.id !== action.id);
     default:
@@ -99,6 +100,7 @@ function Notes() {
             date_of_creation: response.data[key].date_of_creation,
           });
         }
+        loadedUsers.reverse();
         dispatch({
           type: "SET",
           notes: loadedUsers,

@@ -3,6 +3,8 @@ import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
 import "./CreateArea.css";
+import styled  from "styled-components";
+
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
   const [note, setNote] = useState({
@@ -37,13 +39,13 @@ function CreateArea(props) {
   return (
     <div>
       <form className="create-note" onSubmit={submitNote}>
-        {isExpanded && (
-          <input
-            name="title"
-            onChange={handleChange}
-            value={note.title}
-            placeholder="Title"
-          />
+          {isExpanded && (
+            <input
+              name="title"
+              onChange={handleChange}
+              value={note.title}
+              placeholder="Title"
+            />
         )}
 
         <textarea

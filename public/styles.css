@@ -4,16 +4,7 @@
   box-sizing: border-box;
 }
 
+
 html {
   font-family: "Montserrat", sans-serif;
-}
-
-body {
-  background: #eee;
-  background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
-  /* padding: 0 16px; */
-
-  min-height: 90vh;
-  position: relative;
-  display: grid;
 }

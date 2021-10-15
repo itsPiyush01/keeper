@@ -17,8 +17,6 @@ export const GlobalStyles = createGlobalStyle`
       transition:var(--animationColor);
   }
 
-  .note{
-  }
 
   .form.create-note{
     background:orange;
@@ -30,10 +28,7 @@ export const GlobalStyles = createGlobalStyle`
   form.create-note textarea {
     color: ${({ theme }) => theme.componentTxtColor};
     background:${({ theme }) => theme.componentBgColor};
+    transition:var(--animationColor);
   }
 
-
-  form.create-note button {
-    
-  }
   `;

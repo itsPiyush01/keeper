@@ -2,10 +2,16 @@ form.create-note {
      position: relative;
      width: 480px;
      margin: 30px auto 20px auto;
-     background: #fff;
      padding: 15px;
      border-radius: 7px;
-     box-shadow: 0 1px 5px rgb(138, 137, 137);
+     background: var(--bgColor);
+     transition: all 0.50s linear;
+     box-shadow: var(--componentShadow);
+
+     color: var(--componentTxtColor);
+     background: var(--componentBgColor);
+     transition: var(--animationColor);
+
 }
 
 form.create-note input,
@@ -17,14 +23,15 @@ form.create-note textarea {
      font-size: 1.2em;
      font-family: inherit;
      resize: none;
+     /* transition: inherit; */
 }
 
 form.create-note button {
+     color: var(--primaryColor);
      position: absolute;
      right: 18px;
      bottom: -18px;
      background: #f5ba13;
-     color: #fff;
      border: none;
      border-radius: 50%;
      width: 36px;
