@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export const useDarkMode = () => {
   const [theme, setTheme] = useState("light");
-  const [mountedComponent,setMountedComponent]=useState(false);
+  const [mountedComponent, setMountedComponent] = useState(false);
   const setMode = (mode) => {
     window.localStorage.setItem("theme", mode);
     setTheme(mode);
@@ -14,11 +14,10 @@ export const useDarkMode = () => {
   useEffect(() => {
     const localTheme = window.localStorage.getItem("theme");
     localTheme && setTheme(localTheme);
-     setMountedComponent(true)
+    setMountedComponent(true);
   }, []);
 
-  return [theme,themeToggler,mountedComponent]
+  return [theme, themeToggler, mountedComponent];
 };
 
 // Reference::  https://www.smashingmagazine.com/2020/04/dark-mode-react-apps-styled-components/
-
