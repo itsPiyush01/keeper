@@ -15,9 +15,9 @@ function Header(props) {
     <header className="header">
       <h1 className="h1">
         <HighlightIcon />
-        <Toggle theme={theme} toggleTheme={props.toggleTheme} />
         Keeper
       </h1>
+      <Toggle theme={theme} toggleTheme={props.toggleTheme} />
     </header>
   );
 }
