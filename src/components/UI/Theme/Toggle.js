@@ -12,25 +12,26 @@ const Button = styled.button`
   padding: 0.6rem;
   }`;
 
+// FIXME: issue in the toggle button
 function Toggle({ theme, toggleTheme }) {
-  const [isDarkMode, setIsDarkMode] = useState(() => true);
-  // const localTheme = window.localStorage.getItem("theme");
-  useEffect(() => {
-    console.info("[isDarkMode] dark mode");
-    toggleTheme();
+	const [isDarkMode, setIsDarkMode] = useState(() => true);
+	// const localTheme = window.localStorage.getItem("theme");
+	useEffect(() => {
+		console.info("[isDarkMode] dark mode");
+		toggleTheme();
 
-    setIsDarkMode(() => false);
-  }, []);
+		setIsDarkMode(() => false);
+	}, []);
 
-  useEffect(() => {
-    toggleTheme();
-  }, [isDarkMode]);
-  return (
-    <DarkModeToggle onChange={setIsDarkMode} checked={isDarkMode} size={50} />
-  );
+	useEffect(() => {
+		toggleTheme();
+	}, [isDarkMode]);
+	return (
+		<DarkModeToggle onChange={setIsDarkMode} checked={isDarkMode} size={50} />
+	);
 }
 Toggle.propTypes = {
-  theme: string.isRequired,
-  toggleTheme: func.isRequired,
+	theme: string.isRequired,
+	toggleTheme: func.isRequired,
 };
 export default Toggle;

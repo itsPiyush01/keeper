@@ -1,0 +1,16 @@
+export const SET_NOTES = "SET_NOTES";
+export const ADD_NOTE = "ADD_NOTE";
+export const DELETE_NOTE = "DELETE_NOTE";
+export const UPDATE_NOTE = "UPDATE_NOTE";
+
+export const FETCH_NOTES_FAILED = "FETCH_NOTES_FAILED";
+export const FETCH_NOTES_START = "FETCH_NOTES_START";
+export const FETCH_NOTES_SUCCESS = "FETCH_NOTES_SUCCESS";
+export const FETCH_NOTES_FAIL = "FETCH_NOTES_FAIL";
+
+export const AUTH_START = "AUTH_START";
+export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_FAIL = "AUTH_FAIL";
+export const AUTH_LOGOUT = "AUTH_LOGOUT";
+
+export const SET_AUTH_REDIRECT_PATH = "SET_AUTH_REDIRECT_PATH";
