@@ -5,6 +5,8 @@ import { updateObject } from "../../utility/Utility";
 
 const initialState = {
 	userNotes: [],
+	loading: false,
+	error: null,
 };
 
 const setNotes = (state, action) => {
@@ -23,6 +25,22 @@ const deleteNote = (state, action) => {
 	return updateObject(state, { userNotes: notes_after_deletion });
 };
 
+const httpStart = (state, action) => {
+	return updateObject(state, { loading: true });
+};
+
+const httpSuccess = (state, action) => {
+	return updateObject(state, { loading: false });
+};
+
+const httpFail = (state, action) => {
+	return updateObject(state, { error: action.error, loading: false });
+};
+
+const httpClear = (state, action) => {
+	return updateObject(state, { error: null });
+};
+
 const noteReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.SET_NOTES:
@@ -33,6 +51,14 @@ const noteReducer = (state = initialState, action) => {
 			return deleteNote(state, action);
 		case actionTypes.UPDATE_NOTE: //TODO: add update note feature
 			return state;
+		case actionTypes.HTTP_START:
+			return httpStart(state, action);
+		case actionTypes.HTTP_SUCCESS:
+			return httpSuccess(state, action);
+		case actionTypes.HTTP_FAIL:
+			return httpFail(state, action);
+		case actionTypes.HTTP_CLEAR:
+			return httpClear(state, action);
 		default:
 			return state;
 	}

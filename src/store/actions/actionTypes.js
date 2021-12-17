@@ -3,10 +3,10 @@ export const ADD_NOTE = "ADD_NOTE";
 export const DELETE_NOTE = "DELETE_NOTE";
 export const UPDATE_NOTE = "UPDATE_NOTE";
 
-export const FETCH_NOTES_FAILED = "FETCH_NOTES_FAILED";
-export const FETCH_NOTES_START = "FETCH_NOTES_START";
-export const FETCH_NOTES_SUCCESS = "FETCH_NOTES_SUCCESS";
-export const FETCH_NOTES_FAIL = "FETCH_NOTES_FAIL";
+export const HTTP_START = "HTTP_START";
+export const HTTP_SUCCESS = "HTTP_SUCCESS";
+export const HTTP_FAIL = "HTTP_FAIL";
+export const HTTP_CLEAR = "HTTP_CLEAR";
 
 export const AUTH_START = "AUTH_START";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";

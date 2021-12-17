@@ -40,10 +40,10 @@ const httpReducer = (curHttpState, action) => {
 };
 function Notes(props) {
 	// const [userNotes, dispatch] = useReducer(noteReducer, []);
-	const [httpState, dispatchHttp] = useReducer(httpReducer, {
-		loading: false,
-		error: null,
-	});
+	// const [httpState, dispatchHttp] = useReducer(httpReducer, {
+	// 	loading: false,
+	// 	error: null,
+	// });
 
 	useEffect(() => {
 		// console.log("RENDERING NOTES", userNotes);
@@ -51,82 +51,15 @@ function Notes(props) {
 	}, [props.userNotes]);
 
 	const addNoteHandler = (note) => {
-		dispatchHttp({ type: "SEND" });
-		// const d = createDate();
-		const d = new Date();
-		console.log("date" + d);
-
-		// d.toISOString()
-		let noteObject = {
-			...note,
-			date_of_creation: "" + d,
-		};
-
-		axios
-			.post("/notes.json", noteObject)
-			.then((res) => {
-				console.log(res);
-				dispatchHttp({ type: "RESPONSE" });
-				// dispatch({
-				// 	type: "ADD",
-				// 	note: { id: res.data.name, ...noteObject },
-				// });
-				props.onAddNote({ id: res.data.name, ...noteObject });
-			})
-			.catch((err) => {
-				console.log(err);
-				dispatchHttp({ type: "ERROR" });
-			});
+		props.onAddNote(note);
 	};
 
 	const removeNoteHandler = (noteId) => {
-		dispatchHttp({ type: "SEND" });
-		axios
-			.delete(`/notes/${noteId}.json`)
-			.then((res) => {
-				dispatchHttp({ type: "RESPONSE" });
-				// dispatch({ type: "DELETE", id: noteId });
-				props.onDeleteNote(noteId);
-				console.log();
-			})
-			.catch((err) => {
-				console.log(err);
-				dispatchHttp({ type: "ERROR" });
-			});
+		props.onDeleteNote(noteId);
 	};
 
 	useEffect(() => {
-		dispatchHttp({ type: "SEND" });
-		axios
-			.get("https://keeper-app-bd970-default-rtdb.firebaseio.com/notes.json")
-			.then((response) => {
-				dispatchHttp({ type: "RESPONSE" });
-				const loadedUsers = [];
-				for (const key in response.data) {
-					loadedUsers.push({
-						id: key,
-						title: response.data[key].title,
-						content: response.data[key].content,
-						date_of_creation: response.data[key].date_of_creation,
-					});
-				}
-				loadedUsers.reverse();
-
-				props.onSetNote(loadedUsers);
-				// console.info("helllo" + props.userNotes);
-				/*useReducer*/
-				// dispatch({
-				// 	type: "SET",
-				// 	notes: loadedUsers,
-				// });
-				// console.log(response.data);
-				// console.info(userNotes);
-			})
-			.catch((error) => {
-				dispatchHttp({ type: "ERROR" });
-
-				console.log(error);
-			});
+		props.onSetNote();
 	}, []);
 
 	return (
@@ -157,7 +90,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onSetNote: (notes) => dispatch(actions.setNotes(notes)),
+		onSetNote: () => dispatch(actions.setNotes()),
 		onAddNote: (currentNote) => dispatch(actions.addNote(currentNote)),
 		onDeleteNote: (id) => dispatch(actions.deleteNote(id)),
 	};
