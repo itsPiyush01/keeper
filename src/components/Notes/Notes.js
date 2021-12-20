@@ -6,6 +6,12 @@ import styled, { css } from "styled-components";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 
+// import ErrorModal from "../../hoc/withErrorHandler/";
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+// import Interceptor from "./Services/ServiceBase.interceptor";
+// const store = createStore(modalReducer);
+// Interceptor.interceptor(store);
+
 /*
 const noteReducer = (currentNotes, action) => {
 	switch (action.type) {
@@ -22,8 +28,6 @@ const noteReducer = (currentNotes, action) => {
 
 
 
-*/
-
 const httpReducer = (curHttpState, action) => {
 	switch (action.type) {
 		case "SEND":
@@ -38,6 +42,8 @@ const httpReducer = (curHttpState, action) => {
 			throw new Error("Should not be reached!");
 	}
 };
+*/
+
 function Notes(props) {
 	// const [userNotes, dispatch] = useReducer(noteReducer, []);
 	// const [httpState, dispatchHttp] = useReducer(httpReducer, {
@@ -64,6 +70,15 @@ function Notes(props) {
 
 	return (
 		<div>
+			{/* {props.error && (
+				<ErrorModal
+					onClose={() => {
+						props.onClear();
+					}}
+				>
+					{props.error}
+				</ErrorModal>
+			)} */}
 			<CreateArea onAdd={addNoteHandler} />
 
 			{props.userNotes.map((noteItem, index) => {
@@ -85,6 +100,8 @@ function Notes(props) {
 const mapStateToProps = (state) => {
 	return {
 		userNotes: state.notes.userNotes,
+		loading: state.notes.loading,
+		error: state.notes.error,
 	};
 };
 
@@ -93,7 +110,12 @@ const mapDispatchToProps = (dispatch) => {
 		onSetNote: () => dispatch(actions.setNotes()),
 		onAddNote: (currentNote) => dispatch(actions.addNote(currentNote)),
 		onDeleteNote: (id) => dispatch(actions.deleteNote(id)),
+		onClear: () => dispatch(actions.httpClear()),
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Notes);
+// export default connect(mapStateToProps, mapDispatchToProps)(Notes);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withErrorHandler(Notes, axios));

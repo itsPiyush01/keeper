@@ -11,6 +11,7 @@ import reportWebVitals from "./reportWebVitals";
 import authReducer from "./store/reducer/auth";
 import noteReducer from "./store/reducer/Note";
 
+/*Middleware*/
 const logger = (store) => {
 	return (next) => {
 		return (action) => {
@@ -32,7 +33,7 @@ const rootReducer = combineReducers({
 //allow us to create new redux store
 const store = createStore(
 	rootReducer,
-	composeEnhancers(applyMiddleware(logger, thunk))
+	composeEnhancers(applyMiddleware(thunk, logger))
 );
 
 const app = (

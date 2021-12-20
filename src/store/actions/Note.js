@@ -75,7 +75,6 @@ export const setNotes = () => {
 			})
 			.catch((error) => {
 				console.info(error.message);
-				// let msg = error.message;
 				// dispatch(httpFail(error));
 				dispatch(httpFail(error.message));
 				// dispatchHttp({ type: "ERROR" });

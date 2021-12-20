@@ -8,7 +8,7 @@ import { GlobalStyles } from "./components/UI/Theme/globalStyles";
 import Toggle from "./components/UI/Theme/Toggle";
 import { lightTheme, darkTheme } from "./components/UI/Theme/Theme";
 import { useDarkMode } from "./hooks/useDarkMode";
-import asyncComponent from "./utility/asyncComponent";
+import asyncComponent from "./hoc/asyncComponent/asyncComponent";
 import * as actions from "./store/actions/index";
 
 import {
