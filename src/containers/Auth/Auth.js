@@ -5,10 +5,9 @@ import { Redirect } from "react-router-dom";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import classes from "./Auth.css";
+import classes from "./Auth.module.css";
 import * as actions from "../../store/actions/index";
 import { updateObject, checkValidity } from "../../utility/Utility";
-
 class Auth extends Component {
 	state = {
 		controls: {
@@ -48,6 +47,12 @@ class Auth extends Component {
 		if (!this.props.buildingBurger && this.props.authRedirectPath !== "/") {
 			this.props.onSetAuthRedirectPath();
 		}
+		/*
+		: state.auth.loading,
+			error: state.auth.error,
+		isAuthenticated: state.auth.token !== null,
+		authRed
+		*/
 	}
 
 	inputChangedHandler = (event, controlName) => {
@@ -137,7 +142,6 @@ const mapStateToProps = (state) => {
 		loading: state.auth.loading,
 		error: state.auth.error,
 		isAuthenticated: state.auth.token !== null,
-		buildingBurger: state.burgerBuilder.building,
 		authRedirectPath: state.auth.authRedirectPath,
 	};
 };

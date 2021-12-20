@@ -60,8 +60,7 @@ const Logout = () => {
 	return <h1>Logout</h1>;
 };
 
-const App = () => {
-	const [isAuth, setIsAuth] = useState(true);
+const App = (props) => {
 	let routes = (
 		<Switch>
 			<Route path="/auth" component={asyncAuth} />
@@ -70,7 +69,7 @@ const App = () => {
 		</Switch>
 	);
 
-	if (isAuth) {
+	if (props.isAuthenticated) {
 		routes = (
 			<Switch>
 				<Route path="/logout" component={Logout} />

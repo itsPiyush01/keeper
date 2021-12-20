@@ -1,7 +1,4 @@
-import { tokenizer } from "acorn";
-import axios from "axios";
-import { localsName } from "ejs";
-
+import axios from "../../axios-notes";
 import * as actionTypes from "./actionTypes";
 
 export const authStart = () => {
