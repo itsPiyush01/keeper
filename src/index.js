@@ -15,9 +15,9 @@ import noteReducer from "./store/reducer/Note";
 const logger = (store) => {
 	return (next) => {
 		return (action) => {
-			console.log("[Middleware] Dispatching", action);
+			// console.log("[Middleware] Dispatching", action);
 			const result = next(action);
-			console.log("[Middleware] next state ", store.getState());
+			// console.log("[Middleware] next state ", store.getState());
 			return result;
 		};
 	};
@@ -26,8 +26,8 @@ const logger = (store) => {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-	notes: noteReducer,
 	auth: authReducer,
+	notes: noteReducer,
 });
 
 //allow us to create new redux store

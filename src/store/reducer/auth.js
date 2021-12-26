@@ -3,6 +3,7 @@ import { updateObject } from "../../utility/Utility";
 
 const initialState = {
 	token: null,
+	refreshToken: null,
 	userId: null,
 	error: null,
 	loading: false,
@@ -17,6 +18,7 @@ const authSuccess = (state, action) => {
 	return updateObject(state, {
 		token: action.idToken,
 		userId: action.userId,
+		refreshToken: action.refreshToken,
 		error: null,
 		loading: false,
 	});
@@ -30,15 +32,15 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-	return updateObject(state, { token: null, userId: null });
+	return updateObject(state, { token: null, userId: null, refreshToken: null });
 };
 
 const setAuthRedirectPath = (state, action) => {
 	return updateObject(state, { authRedirectPath: action.path });
 };
 
-const reducer = (state = initialState, action) => {
-	switch (action.Types) {
+const authReducer = (state = initialState, action) => {
+	switch (action.type) {
 		case actionTypes.AUTH_START:
 			return authStart(state, action);
 		case actionTypes.AUTH_SUCCESS:
@@ -54,4 +56,4 @@ const reducer = (state = initialState, action) => {
 	}
 };
 
-export default reducer;
+export default authReducer;

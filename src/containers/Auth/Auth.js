@@ -8,6 +8,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import classes from "./Auth.module.css";
 import * as actions from "../../store/actions/index";
 import { updateObject, checkValidity } from "../../utility/Utility";
+import ErrorModal from "../../components/UI/ErrorModal/ErrorModal";
 class Auth extends Component {
 	state = {
 		controls: {
@@ -40,20 +41,8 @@ class Auth extends Component {
 				touched: false,
 			},
 		},
-		isSignup: true,
+		isSignup: false,
 	};
-
-	componentDidMount() {
-		if (!this.props.buildingBurger && this.props.authRedirectPath !== "/") {
-			this.props.onSetAuthRedirectPath();
-		}
-		/*
-		: state.auth.loading,
-			error: state.auth.error,
-		isAuthenticated: state.auth.token !== null,
-		authRed
-		*/
-	}
 
 	inputChangedHandler = (event, controlName) => {
 		const updatedControls = updateObject(this.state.controls, {
@@ -82,6 +71,9 @@ class Auth extends Component {
 		this.setState((prevState) => {
 			return { isSignup: !prevState.isSignup };
 		});
+	};
+	errorConfirmedHandler = () => {
+		this.props.onClear();
 	};
 
 	render() {
@@ -138,6 +130,7 @@ class Auth extends Component {
 }
 
 const mapStateToProps = (state) => {
+	// debugger;
 	return {
 		loading: state.auth.loading,
 		error: state.auth.error,

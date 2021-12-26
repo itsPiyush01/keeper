@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Header from "./components/UI/Header/Header";
 import Notes from "./components/Notes/Notes";
 // import createDate from "../utility/dateFormatter";
@@ -8,9 +8,8 @@ import { GlobalStyles } from "./components/UI/Theme/globalStyles";
 import Toggle from "./components/UI/Theme/Toggle";
 import { lightTheme, darkTheme } from "./components/UI/Theme/Theme";
 import { useDarkMode } from "./hooks/useDarkMode";
-import asyncComponent from "./hoc/asyncComponent/asyncComponent";
 import * as actions from "./store/actions/index";
-
+import Auth from "./containers/Auth/Auth";
 import {
 	Route,
 	Switch,
@@ -18,10 +17,7 @@ import {
 	Redirect,
 	BrowserRouter as Router,
 } from "react-router-dom";
-
-const asyncAuth = asyncComponent(() => {
-	return import("./containers/Auth/Auth");
-});
+import Logout from "./containers/Auth/Logout/Logout";
 
 const NotesComponent = () => {
 	const [theme, themeToggler, mountedComponent] = useDarkMode();
@@ -56,16 +52,18 @@ const NotesComponent = () => {
 //   );
 // }
 
-const Logout = () => {
-	return <h1>Logout</h1>;
-};
+// const Logout = () => {
+// 	return <h1>Logout</h1>;
+// };
 
 const App = (props) => {
+	useEffect(() => {
+		props.onTryAutoSignup();
+		console.log("[useEffect]");
+	}, []);
 	let routes = (
 		<Switch>
-			<Route path="/auth" component={asyncAuth} />
-			<Route path="/" exact component={asyncAuth} />
-			<Redirect to="/" />
+			<Route path="/" component={Auth} />
 		</Switch>
 	);
 
@@ -91,6 +89,7 @@ const App = (props) => {
 // export default App;
 // export default AppWrapper;
 const mapStateToProps = (state) => {
+	// debugger;
 	return {
 		isAuthenticated: state.auth.token !== null,
 	};
