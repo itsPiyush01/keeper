@@ -31,13 +31,13 @@ export const logout = () => {
 	};
 };
 
-export const checkAuthTimeout = (expirationTime) => {
-	return (dispatch) => {
-		setTimeout(() => {
-			dispatch(logout());
-		}, expirationTime * 1000); //millisecond to minute -->1hr
-	};
-};
+// export const checkAuthTimeout = (expirationTime) => {
+// 	return (dispatch) => {
+// 		setTimeout(() => {
+// 			dispatch(logout());
+// 		}, expirationTime * 1000); //millisecond to minute -->1hr
+// 	};
+// };
 
 export const auth = (email, password, isSignup) => {
 	return (dispatch) => {
@@ -66,9 +66,12 @@ export const auth = (email, password, isSignup) => {
 				localStorage.setItem("token", res.data.idToken);
 				localStorage.setItem("expirationTime", expirationTime);
 				localStorage.setItem("userId", res.data.localId);
+				localStorage.setItem("userId", res.data.refreshToken); ///refreshToken
 
 				dispatch(authSuccess(res.data.idToken, res.data.localId));
-				dispatch(checkAuthTimeout(res.data.expiresIn));
+
+				// dispatch(checkAuthTimeout(res.data.expiresIn));
+				/*Refresh Token after every hr 1 */
 			})
 			.catch((err) => {
 				console.log(err);
@@ -77,6 +80,56 @@ export const auth = (email, password, isSignup) => {
 	};
 };
 
+// export const checkAuthTimeout
+/* Refresh Token*/
+export const refreshTokenInterval = () => {
+	// refreshToken
+
+	// getToken() {
+
+	// 	// clearTimeout(this.tokenExpire);
+	// 	// this.tokenExpire = setTimeout(() => getToken(), 5000);
+	//  }
+
+	return (dispatch) => {
+		let refreshToken = localStorage.getItem("refreshToken");
+		if (!refreshToken) {
+			dispatch(logout);
+		} else {
+			let url =
+				"https://securetoken.googleapis.com/v1/token?key=AIzaSyBbDjJP-TJexZevEIOgWHDjoNWZDZXPnoE";
+
+			let payload = {
+				grant_type: "refresh_token",
+				refresh_token: refreshToken,
+			};
+			axios
+				.post(url, payload)
+				.then((res) => {
+					console.log(res);
+					const expirationTime = new Date(
+						new Date().getTime() + res.data.expiresIn * 1000
+					);
+
+					localStorage.setItem("token", res.data.idToken);
+					localStorage.setItem("refreshToken", res.data.refreshToken); ///refreshToken
+					localStorage.setItem("expirationTime", expirationTime);
+					localStorage.setItem("userId", res.data.localId);
+					dispatch(authSuccess(res.data.idToken, res.data.localId));
+
+					clearTimeout(this.tokenExpire);
+					this.tokenExpire = setTimeout(() => refreshTokenInterval(), 1000);
+				})
+				.catch((err) => {
+					console.log(err);
+					dispatch(authFail(err.response.data.error));
+					clearTimeout(this.tokenExpire);
+				});
+		}
+	};
+};
+
+refreshTokenInterval();
 export const setAuthRedirectPath = (path) => {
 	return {
 		type: actionTypes.SET_AUTH_REDIRECT_PATH,
@@ -92,15 +145,15 @@ export const authCheckState = () => {
 		} else {
 			const expirationTime = new Date(localStorage.getItem("expirationTime"));
 			if (expirationTime <= new Date()) {
-				dispatch(logout());
+				/* Refresh Token */
+				refreshTokenInterval();
 			} else {
 				const userId = localStorage.getItem("userId");
 				dispatch(authSuccess(token, userId));
-				dispatch(
-					checkAuthTimeout(
-						(expirationTime.getTime() - new Date().getTime()) / 1000
-					)
-				);
+				// dispatch();
+				// checkAuthTimeout(
+				// 	(expirationTime.getTime() - new Date().getTime()) / 1000
+				// )
 			}
 			// dispatch(authSuccess());
 		}
