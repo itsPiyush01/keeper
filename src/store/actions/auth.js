@@ -75,13 +75,12 @@ export const auth = (email, password, isSignup) => {
 			})
 			.catch((err) => {
 				console.log(err);
-				dispatch(authFail(err.response.data.error));
+				dispatch(authFail(err));
 			});
 	};
 };
-
-// export const checkAuthTimeout
 /* Refresh Token*/
+/*
 export const refreshTokenInterval = () => {
 	// refreshToken
 
@@ -128,8 +127,8 @@ export const refreshTokenInterval = () => {
 		}
 	};
 };
+*/
 
-refreshTokenInterval();
 export const setAuthRedirectPath = (path) => {
 	return {
 		type: actionTypes.SET_AUTH_REDIRECT_PATH,
@@ -138,24 +137,24 @@ export const setAuthRedirectPath = (path) => {
 };
 
 export const authCheckState = () => {
+	debugger;
 	return (dispatch) => {
 		const token = localStorage.getItem("token");
 		if (!token) {
-			dispatch(logout);
+			console.log("!TOKEN");
+			// dispatch(logout);
 		} else {
 			const expirationTime = new Date(localStorage.getItem("expirationTime"));
 			if (expirationTime <= new Date()) {
-				/* Refresh Token */
-				refreshTokenInterval();
-			} else {
 				const userId = localStorage.getItem("userId");
 				dispatch(authSuccess(token, userId));
-				// dispatch();
-				// checkAuthTimeout(
-				// 	(expirationTime.getTime() - new Date().getTime()) / 1000
-				// )
+			} else {
+				/* Refresh Token */
+				// refreshTokenInterval();
+				// dispatch(logout);
+				// const userId = localStorage.getItem("userId");
+				// dispatch(authSuccess(token, userId));
 			}
-			// dispatch(authSuccess());
 		}
 	};
 };
