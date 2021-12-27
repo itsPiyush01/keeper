@@ -1,22 +1,24 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-notes";
 
-export const addNote = (currentNote) => {
+export const addNote = (currentNote, token, userId) => {
 	return (dispatch) => {
 		dispatch(httpStart());
 		// dispatchHttp({ type: "SEND" });
 		// const d = createDate();
 		const d = new Date();
 		console.log("date" + d);
+		// console.info(token);
 
 		// d.toISOString()
 		let noteObject = {
 			...currentNote,
 			date_of_creation: "" + d,
+			userId: userId,
 		};
 
 		axios
-			.post("/notes.json", noteObject)
+			.post("/notes.json?auth=" + token, noteObject)
 			.then((res) => {
 				console.log(res);
 				// dispatchHttp({ type: "RESPONSE" });
@@ -42,11 +44,15 @@ export const addNote = (currentNote) => {
 	};
 };
 
-export const setNotes = () => {
+/*GET NOTES FROM FIREBASE */
+export const setNotes = (token, userId) => {
+	console.log("[userId]" + userId);
 	return (dispatch) => {
+		const queryParams =
+			"?auth=" + token + '&orderBy="userId"&equalTo="' + userId + '"';
 		dispatch(httpStart());
 		axios
-			.get("/notes.json")
+			.get("/notes.json" + queryParams)
 			.then((response) => {
 				// dispatchHttp({ type: "RESPONSE" });
 				const loadedUsers = [];
@@ -82,12 +88,12 @@ export const setNotes = () => {
 	};
 };
 
-export const deleteNote = (id) => {
+export const deleteNote = (id, token) => {
 	return (dispatch) => {
 		dispatch(httpStart());
 		// dispatchHttp({ type: "SEND" });
 		axios
-			.delete(`/notes/${id}.json`)
+			.delete(`/notes/${id}.json?auth=${token}`)
 			.then((res) => {
 				// dispatchHttp({ type: "RESPONSE" });
 				// dispatch({ type: "DELETE", id: noteId });

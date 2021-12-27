@@ -53,19 +53,20 @@ function Notes(props) {
 
 	useEffect(() => {
 		// console.log("RENDERING NOTES", userNotes);
+
 		console.log("RENDERING NOTES", props.userNotes);
 	}, [props.userNotes]);
 
 	const addNoteHandler = (note) => {
-		props.onAddNote(note);
+		props.onAddNote(note, props.token, props.userId);
 	};
 
 	const removeNoteHandler = (noteId) => {
-		props.onDeleteNote(noteId);
+		props.onDeleteNote(noteId, props.token);
 	};
 
 	useEffect(() => {
-		props.onSetNote();
+		props.onSetNotes(props.token, props.userId);
 	}, []);
 
 	return (
@@ -102,14 +103,20 @@ const mapStateToProps = (state) => {
 		userNotes: state.notes.userNotes,
 		loading: state.notes.loading,
 		error: state.notes.error,
+		token: state.auth.token,
+		userId: state.auth.userId,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onSetNote: () => dispatch(actions.setNotes()),
-		onAddNote: (currentNote) => dispatch(actions.addNote(currentNote)),
-		onDeleteNote: (id) => dispatch(actions.deleteNote(id)),
+		onSetNotes: (token, userId) => dispatch(actions.setNotes(token, userId)),
+
+		onAddNote: (currentNote, token, userId) =>
+			dispatch(actions.addNote(currentNote, token, userId)),
+
+		onDeleteNote: (id, token) => dispatch(actions.deleteNote(id, token)),
+
 		onClear: () => dispatch(actions.httpClear()),
 	};
 };

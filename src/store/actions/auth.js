@@ -66,7 +66,7 @@ export const auth = (email, password, isSignup) => {
 				localStorage.setItem("token", res.data.idToken);
 				localStorage.setItem("expirationTime", expirationTime);
 				localStorage.setItem("userId", res.data.localId);
-				localStorage.setItem("userId", res.data.refreshToken); ///refreshToken
+				// localStorage.setItem("refreshToken", res.data.refreshToken); ///refreshToken
 
 				dispatch(authSuccess(res.data.idToken, res.data.localId));
 
@@ -137,7 +137,7 @@ export const setAuthRedirectPath = (path) => {
 };
 
 export const authCheckState = () => {
-	debugger;
+	// debugger;
 	return (dispatch) => {
 		const token = localStorage.getItem("token");
 		if (!token) {
@@ -146,14 +146,13 @@ export const authCheckState = () => {
 		} else {
 			const expirationTime = new Date(localStorage.getItem("expirationTime"));
 			if (expirationTime <= new Date()) {
-				const userId = localStorage.getItem("userId");
-				dispatch(authSuccess(token, userId));
-			} else {
+				// TODO: Refresh the Token
 				/* Refresh Token */
-				// refreshTokenInterval();
-				// dispatch(logout);
 				// const userId = localStorage.getItem("userId");
 				// dispatch(authSuccess(token, userId));
+			} else {
+				const userId = localStorage.getItem("userId");
+				dispatch(authSuccess(token, userId));
 			}
 		}
 	};
