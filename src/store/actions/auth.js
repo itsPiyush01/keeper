@@ -74,8 +74,13 @@ export const auth = (email, password, isSignup) => {
 				/*Refresh Token after every hr 1 */
 			})
 			.catch((err) => {
-				console.log(err);
-				dispatch(authFail(err));
+				// debugger;
+				if (err.response !== undefined) {
+					console.log(err.response.data.error); //.error.message
+					dispatch(authFail(err.response.data.error));
+				} else {
+					dispatch(authFail(err));
+				}
 			});
 	};
 };
