@@ -1,8 +1,7 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useEffect } from "react";
 import Note from "./Note/Note";
 import CreateArea from "../CreateArea/CreateArea";
 import axios from "../../axios-notes";
-import styled, { css } from "styled-components";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 
@@ -66,7 +65,7 @@ function Notes(props) {
 	};
 
 	useEffect(() => {
-		props.onSetNotes(props.token, props.userId);
+		// props.onSetNotes(props.token, props.userId);
 	}, []);
 
 	return (

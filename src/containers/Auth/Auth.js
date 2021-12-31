@@ -8,7 +8,6 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import classes from "./Auth.module.css";
 import * as actions from "../../store/actions/index";
 import { updateObject, checkValidity } from "../../utility/Utility";
-import ErrorModal from "../../components/UI/ErrorModal/ErrorModal";
 class Auth extends Component {
 	state = {
 		controls: {
