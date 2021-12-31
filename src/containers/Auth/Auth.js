@@ -5,9 +5,11 @@ import { Redirect } from "react-router-dom";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import classes from "./Auth.module.css";
+import "./Auth.css";
 import * as actions from "../../store/actions/index";
 import { updateObject, checkValidity } from "../../utility/Utility";
+import { HashRouter as Router, Route, NavLink } from "react-router-dom";
+
 class Auth extends Component {
 	state = {
 		controls: {
@@ -111,18 +113,60 @@ class Auth extends Component {
 		if (this.props.isAuthenticated) {
 			authRedirect = <Redirect to={this.props.authRedirectPath} />;
 		}
-
 		return (
-			<div className={classes.Auth}>
+			<div className="Auth">
 				{authRedirect}
-				{errorMessage}
+
+				<h1>{this.state.isSignup ? "SIGN UP" : "LOGIN"}</h1>
+
 				<form onSubmit={this.submitHandler}>
 					{form}
+
+					<p
+						style={{
+							color: "red ",
+							textAlign: "start",
+							marginLeft: "10px",
+						}}
+					>
+						{errorMessage}
+					</p>
+
 					<Button btnType="Success">SUBMIT</Button>
 				</form>
-				<Button clicked={this.switchAuthModeHandler} btnType="Danger">
-					SWITCH TO {this.state.isSignup ? "SIGNIN" : "SIGNUP"}
-				</Button>
+				<Router>
+					<div className="App">
+						<div className="appAside">
+							{/* <img className="logo" src={logo} alt="this is logo" /> */}
+						</div>
+						<div className="appForm">
+							<div className="pageSwitcher">
+								<button
+									className={
+										this.state.isSignup
+											? " pageSwitcherItem "
+											: " pageSwitcherItem pageSwitcherItem-active"
+									}
+									onClick={this.switchAuthModeHandler}
+									disabled={!this.state.isSignup}
+								>
+									Login
+								</button>
+								<button
+									className={
+										!this.state.isSignup
+											? "pageSwitcherItem "
+											: " pageSwitcherItem pageSwitcherItem-active "
+									}
+									onClick={this.switchAuthModeHandler}
+									disabled={this.state.isSignup}
+								>
+									Sign Up
+								</button>
+							</div>
+						</div>
+					</div>
+				</Router>
 			</div>
 		);
 	}
