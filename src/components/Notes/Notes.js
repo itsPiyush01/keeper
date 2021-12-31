@@ -65,7 +65,7 @@ function Notes(props) {
 	};
 
 	useEffect(() => {
-		// props.onSetNotes(props.token, props.userId);
+		props.onSetNotes(props.token, props.userId);
 	}, []);
 
 	return (
