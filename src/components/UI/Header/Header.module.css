@@ -14,3 +14,27 @@
      font-family: "McLaren", cursive;
      font-weight: 200;
 }
+
+.header__btn {
+
+
+     background-color: #f5ba13;
+     /* Green */
+     border: .2rem solid transparent;
+     color: white;
+     /* padding: 15px 32px; */
+     text-align: center;
+     text-decoration: none;
+     font-size: 1.1rem;
+     cursor: pointer;
+}
+
+
+.nav__div {
+     display: flex;
+
+}
+
+.nav__div>* {
+     margin: .5rem;
+}
