@@ -8,9 +8,6 @@ export const addNote = (currentNote, token, userId) => {
 		// const d = createDate();
 		const d = new Date();
 		console.log("date" + d);
-		// console.info(token);
-
-		// d.toISOString()
 		let noteObject = {
 			...currentNote,
 			date_of_creation: "" + d,
@@ -64,8 +61,10 @@ export const setNotes = (token, userId) => {
 						date_of_creation: response.data[key].date_of_creation,
 					});
 				}
-				loadedUsers.reverse();
-				// console.info("helllo" + props.userNotes);
+				// sort notes according to there date.
+				loadedUsers.sort(function (a, b) {
+					return new Date(b.date_of_creation) - new Date(a.date_of_creation);
+				});
 				/*useReducer*/
 				// dispatch({
 				// 	type: "SET",

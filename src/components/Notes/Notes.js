@@ -4,7 +4,7 @@ import CreateArea from "../CreateArea/CreateArea";
 import axios from "../../axios-notes";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-
+import classes from "./Notes.module.css";
 // import ErrorModal from "../../hoc/withErrorHandler/";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 // import Interceptor from "./Services/ServiceBase.interceptor";
@@ -80,19 +80,20 @@ function Notes(props) {
 				</ErrorModal>
 			)} */}
 			<CreateArea onAdd={addNoteHandler} />
-
-			{props.userNotes.map((noteItem, index) => {
-				return (
-					<Note
-						key={index}
-						id={noteItem.id}
-						title={noteItem.title}
-						content={noteItem.content}
-						date_of_creation={noteItem.date_of_creation}
-						onDelete={removeNoteHandler}
-					/>
-				);
-			})}
+			<div className={classes.Notes}>
+				{props.userNotes.map((noteItem, index) => {
+					return (
+						<Note
+							key={index}
+							id={noteItem.id}
+							title={noteItem.title}
+							content={noteItem.content}
+							date_of_creation={noteItem.date_of_creation}
+							onDelete={removeNoteHandler}
+						/>
+					);
+				})}
+			</div>
 		</div>
 	);
 }

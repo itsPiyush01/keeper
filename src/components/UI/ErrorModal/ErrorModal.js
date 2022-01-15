@@ -15,7 +15,19 @@ const ErrorModal = React.memo((props) => {
 					<h2>An Error Occurred!</h2>
 					<p>{props.children}</p>
 					<div className="error-modal__actions">
-						<button type="button" onClick={props.modalClosed}>
+						<button
+							type="button"
+							style={{
+								textDecoration: "none",
+								fontSize: "1.1rem",
+								// border: "0.2rem solid transparent",
+								backgroundColor: "transparent",
+								color: "#f5ba13",
+								border: "none",
+								cursor: "pointer",
+							}}
+							onClick={props.modalClosed}
+						>
 							Okay
 						</button>
 					</div>
