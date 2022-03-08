@@ -25,6 +25,19 @@ const deleteNote = (state, action) => {
 	return updateObject(state, { userNotes: notes_after_deletion });
 };
 
+const updateNote = (state, action) => {
+	const updatedNotes = state.userNotes.map((note) => {
+		if (note.id !== action.id) {
+			// This isn't the note we care about - keep it as-is
+			return note;
+		}
+
+		// Otherwise, this is the one we want - return an updated value
+		return updateObject(note, { title: action.title, content: action.content });
+	});
+	return updateObject(state, { userNotes: updatedNotes });
+};
+
 const httpStart = (state, action) => {
 	return updateObject(state, { loading: true });
 };
@@ -49,8 +62,8 @@ const noteReducer = (state = initialState, action) => {
 			return addNote(state, action);
 		case actionTypes.DELETE_NOTE:
 			return deleteNote(state, action);
-		case actionTypes.UPDATE_NOTE: //TODO: add update note feature
-			return state;
+		case actionTypes.UPDATE_NOTE:
+			return updateNote(state, action);
 		case actionTypes.HTTP_START:
 			return httpStart(state, action);
 		case actionTypes.HTTP_SUCCESS:

@@ -50,6 +50,12 @@ function Notes(props) {
 	// 	error: null,
 	// });
 
+	const [clickedNote, setClickedNote] = React.useState(undefined);
+	const handleClick = (index) => {
+		// console.log(index);
+		setClickedNote(index);
+	};
+
 	useEffect(() => {
 		// console.log("RENDERING NOTES", userNotes);
 
@@ -90,6 +96,9 @@ function Notes(props) {
 							content={noteItem.content}
 							date_of_creation={noteItem.date_of_creation}
 							onDelete={removeNoteHandler}
+							active={clickedNote === index}
+							index={index}
+							handleClick={(k) => handleClick(k)}
 						/>
 					);
 				})}

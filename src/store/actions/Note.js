@@ -16,6 +16,7 @@ export const addNote = (currentNote, token, userId) => {
 
 		axios
 			.post("/notes.json?auth=" + token, noteObject)
+			// .post("/notes.json", noteObject)
 			.then((res) => {
 				console.log(res);
 				// dispatchHttp({ type: "RESPONSE" });
@@ -50,6 +51,7 @@ export const setNotes = (token, userId) => {
 		dispatch(httpStart());
 		axios
 			.get("/notes.json" + queryParams)
+			// .get("/notes.json")
 			.then((response) => {
 				// dispatchHttp({ type: "RESPONSE" });
 				const loadedUsers = [];
@@ -111,9 +113,18 @@ export const deleteNote = (id, token) => {
 	};
 };
 
-export const updateNote = (updateNote) => {
-	return {
-		type: actionTypes.UPDATE_NOTE,
+export const updateNote = (noteId, note, userId) => {
+	return (dispatch) => {
+		dispatch(httpStart());
+		// dispatchHttp({ type: "SEND" });
+
+		dispatch({
+			type: actionTypes.UPDATE_NOTE,
+			id: noteId,
+			title: note.title,
+			content: note.content,
+		});
+		dispatch(httpSuccess());
 	};
 };
 

@@ -1,0 +1,31 @@
+.Title,
+.Textarea {
+     display: block;
+     width: 100%;
+     border: none;
+     padding: 1rem;
+     outline: none;
+     font-size: 1rem;
+     font-family: inherit;
+     resize: none;
+     color: var(--primaryColor);
+     background-color: var(--componentBgColor);
+     color: var(--componentTxtColor);
+     transition: var(--animationColor);
+
+     background: var(--componentBgColor);
+}
+
+.Title {
+     font-size: 1.3rem;
+     padding-bottom: 0rem;
+
+
+}
+
+
+.Textarea {
+     /* height: 100rem; */
+     /* height: 50vh; */
+     height: 12rem;
+}

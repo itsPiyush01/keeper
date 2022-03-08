@@ -15,6 +15,7 @@ export const GlobalStyles = createGlobalStyle`
     --bgColor:${({ theme }) => theme.componentBgColor};
     --primaryColor:${({ theme }) => theme.componentBgColor};
       transition:var(--animationColor);
+    --borderColor:${({ theme }) => theme.borderColor};
   }
 
 
