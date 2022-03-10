@@ -18,9 +18,9 @@ function Note(props) {
 	}
 
 	const NoteRef = React.useRef(null);
-	const { index, active, handleClick } = props;
+	const { id, active, handleClick } = props;
 	const handleNoteClick = () => {
-		handleClick(index);
+		handleClick(id);
 	};
 
 	// handleClick(17);

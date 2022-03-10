@@ -90,13 +90,13 @@ function Notes(props) {
 				{props.userNotes.map((noteItem, index) => {
 					return (
 						<Note
-							key={index}
+							key={noteItem.id}
 							id={noteItem.id}
 							title={noteItem.title}
 							content={noteItem.content}
 							date_of_creation={noteItem.date_of_creation}
 							onDelete={removeNoteHandler}
-							active={clickedNote === index}
+							active={clickedNote === noteItem.id}
 							index={index}
 							handleClick={(k) => handleClick(k)}
 						/>

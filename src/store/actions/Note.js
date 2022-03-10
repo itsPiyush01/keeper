@@ -113,17 +113,40 @@ export const deleteNote = (id, token) => {
 	};
 };
 
-export const updateNote = (noteId, note, userId) => {
+export const updateNote = (noteId, note, token, userId) => {
 	return (dispatch) => {
 		dispatch(httpStart());
 		// dispatchHttp({ type: "SEND" });
 
-		dispatch({
-			type: actionTypes.UPDATE_NOTE,
-			id: noteId,
-			title: note.title,
-			content: note.content,
-		});
+		const d = new Date();
+		console.log("date" + d);
+		let noteObject = {
+			...note,
+			date_of_creation: "" + d,
+			userId: userId,
+		};
+
+		axios
+			.put(`/notes/${noteId}.json?auth=${token}`, noteObject)
+			.then((res) => {
+				// dispatchHttp({ type: "RESPONSE" });
+				// dispatch({ type: "DELETE", id: noteId });
+				// props.onDeleteNote(noteId);
+
+				dispatch({
+					type: actionTypes.UPDATE_NOTE,
+					id: noteId,
+					title: note.title,
+					content: note.content,
+				});
+				dispatch(httpSuccess());
+			})
+			.catch((err) => {
+				console.log(err);
+				// dispatchHttp({ type: "ERROR" });
+				dispatch(httpFail(err.message));
+			});
+
 		dispatch(httpSuccess());
 	};
 };

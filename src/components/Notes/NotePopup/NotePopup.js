@@ -32,7 +32,7 @@ function NotePopup(props) {
 		// title or content then update global state and update the database
 		if (prevNote.title !== note.title || prevNote.content !== note.content) {
 			console.log("Update Note");
-			props.onUpdateNote(props.id, note, props.userId);
+			props.onUpdateNote(props.id, note, props.token, props.userId);
 		}
 	};
 	const handleChange = (event) => {
@@ -87,8 +87,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onDeleteNote: (id, token) => dispatch(actions.deleteNote(id, token)),
 
-		onUpdateNote: (noteId, note, userId) =>
-			dispatch(actions.updateNote(noteId, note, userId)),
+		onUpdateNote: (noteId, note, token, userId) =>
+			dispatch(actions.updateNote(noteId, note, token, userId)),
 	};
 };
 
