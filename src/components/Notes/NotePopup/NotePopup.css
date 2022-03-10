@@ -14,6 +14,8 @@
      transition: var(--animationColor);
 
      background: var(--componentBgColor);
+
+
 }
 
 .Title {
@@ -25,7 +27,7 @@
 
 
 .Textarea {
-     /* height: 100rem; */
-     /* height: 50vh; */
-     height: 12rem;
+     min-height: 5rem;
+     max-height: 20rem;
+     resize: "none"
 }

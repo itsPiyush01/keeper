@@ -6,9 +6,12 @@ import { StyledNote } from "./Note.Style";
 import NotePopup from "../NotePopup/NotePopup";
 
 function Note(props) {
-	let content = props.content;
-	if (content.length > 200) {
-		content = content.substr(0, 100) + " ...";
+	let { content, title } = props;
+	// if (content.length > 200) {
+	// 	content = content.substr(0, 100) + " ...";
+	// }
+	if (title.length > 200) {
+		title = title.substr(0, 100) + " ...";
 	}
 
 	function handleDelete(e) {
@@ -31,7 +34,7 @@ function Note(props) {
 		// a.style.top = b.clientTop + "px";
 		a.style.top = b.offsetTop + "px";
 		a.style.width = b.offsetWidth + "px";
-		a.style.height = b.clientHeight + "px";
+		// a.style.height = b.clientHeight + "px";
 	}, []);
 	// TODO: FIX Popup effect
 	// const [scrollTop, setScrollTop] = useState(0);
@@ -55,7 +58,7 @@ function Note(props) {
 		<React.Fragment>
 			<StyledNote active={active} onClick={handleNoteClick} ref={NoteRef}>
 				<div className="note">
-					<h1>{props.title}</h1>
+					<h1>{title}</h1>
 					<p>{content}</p>
 					{/* <button onClick={handleDelete} className="delete__button">
 						<DeleteIcon />
@@ -66,6 +69,7 @@ function Note(props) {
 				</div>
 
 				<NotePopup
+					active={active}
 					title={props.title}
 					content={props.content}
 					date_of_creation={props.date_of_creation}

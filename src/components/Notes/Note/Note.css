@@ -9,7 +9,7 @@
      transition: var(--animationColor);
      cursor: pointer;
      min-width: 10rem;
-     min-height: 5rem;
+     /* min-height: 5rem; */
 }
 
 .note h1 {
@@ -22,6 +22,12 @@
      margin-bottom: 10px;
      white-space: pre-wrap;
      word-wrap: break-word;
+     display: -webkit-box;
+     -webkit-line-clamp: 4;
+     /* number of lines to show */
+     line-clamp: 4;
+     -webkit-box-orient: vertical;
+     overflow: hidden;
 }
 
 .delete__button {

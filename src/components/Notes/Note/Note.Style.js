@@ -22,16 +22,18 @@ export const StyledNote = styled.div`
 		${({ active }) =>
 			active
 				? `
-      width: 40vw !important;
-     
+      width: 38rem !important;
 	 padding:.5rem;
-
-      height: 40vh !important;
       top: 45% !important;
       left: 50% !important; 
       transform: translate(-50%, -50%);
       z-index: 1;
       opacity: 1;
+
+	 @media (max-width: 700px) {
+		width: 25rem !important;
+
+	}
     `
 				: `
       z-index: -1;
