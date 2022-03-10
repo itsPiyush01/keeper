@@ -64,6 +64,7 @@ function NotePopup(props) {
 	/* Check previous state of note in case of props.active changed because user may had clicked on the other note
 	after updating this note.
 	*/
+
 	useEffect(() => {
 		console.log("useEffect[props.active]");
 		if (title !== note.title || content !== note.content) {

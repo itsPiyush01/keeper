@@ -1,5 +1,5 @@
 import React from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
+// import DeleteIcon from "@material-ui/icons/Delete";
 import dateFormatter from "../../../utility/dateFormatter";
 import "./Note.css";
 import { StyledNote } from "./Note.Style";
@@ -14,11 +14,11 @@ function Note(props) {
 		title = title.substr(0, 100) + " ...";
 	}
 
-	function handleDelete(e) {
-		props.onDelete(props.id);
-		alert("Are you sure ");
-		e.stopPropagation();
-	}
+	// function handleDelete(e) {
+	// 	props.onDelete(props.id);
+	// 	alert("Are you sure ");
+	// 	e.stopPropagation();
+	// }
 
 	const NoteRef = React.useRef(null);
 	const { id, active, handleClick } = props;

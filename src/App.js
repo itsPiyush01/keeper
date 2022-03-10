@@ -51,7 +51,7 @@ const App = (props) => {
 	useEffect(() => {
 		props.onTryAutoSignup();
 		console.log("[useEffect]");
-	}, []);
+	});
 	let routes = (
 		<Switch>
 			<Route path="/" component={Auth} />

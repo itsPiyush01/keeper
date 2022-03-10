@@ -57,6 +57,9 @@ function Notes(props) {
 	};
 
 	useEffect(() => {
+		props.onSetNotes(props.token, props.userId);
+	}, []);
+	useEffect(() => {
 		// console.log("RENDERING NOTES", userNotes);
 
 		console.log("RENDERING NOTES", props.userNotes);
@@ -69,10 +72,6 @@ function Notes(props) {
 	const removeNoteHandler = (noteId) => {
 		props.onDeleteNote(noteId, props.token);
 	};
-
-	useEffect(() => {
-		props.onSetNotes(props.token, props.userId);
-	}, []);
 
 	return (
 		<div>

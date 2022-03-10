@@ -8,7 +8,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import "./Auth.css";
 import * as actions from "../../store/actions/index";
 import { updateObject, checkValidity } from "../../utility/Utility";
-import { HashRouter as Router, Route, NavLink } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 
 class Auth extends Component {
 	state = {
